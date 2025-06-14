@@ -19,9 +19,12 @@ class PowerSourceServerBase extends Base {
   }
 
   private update(entity: HomeAssistantEntityInformation) {
-    const percent = this.state.config.getBatteryPercent(entity.state, this.agent);
-    applyPatchState(this.state as any, {
-      batPercentRemaining: percent == null ? null : Math.round(percent * 2),
+    const percent = this.state.config.getBatteryPercent(
+      entity.state,
+      this.agent,
+    );
+    applyPatchState<PowerSourceServerBase.State>(this.state, {
+      batPercentRemaining: percent == null ? null : Math.round(percent * 200),
     });
   }
 }
